@@ -105,10 +105,9 @@ else:
         "default": {
             "ENGINE": "django.db.backends.postgresql",
             "NAME": os.environ.get("RDS_NAME"),
+            "USER": os.environ.get("RDS_USER"),
             "HOST": os.environ.get("RDS_HOST"),
             "PASSWORD": os.environ.get("RDS_PASSWORD"),
-            "USER": os.environ.get("RDS_USER"),
-            "PORT": "5432",
         }
     }
 
@@ -149,7 +148,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = "/static/"
-ALLOWED_HOSTS = ["*"]
 X_FRAME_OPTIONS = "*"
 
 
