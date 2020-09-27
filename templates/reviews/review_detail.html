@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+  Review Detail
+{% endblock page_title %}
+
+
+{% block content %}
+<div class="container mx-auto mt-10 h-32">
+    <div>Created_by: {{review.created_by}}</div>
+    <div class="mb-10">{{review.text}}</div>
+    <a href="{% url 'reviews:edit' review.pk %}" class="text-white font-light bg-blue-400 hover:bg-blue-600 rounded-lg px-4 py-2 mt-10">Edit Review</a>
+</div>
+{% endblock content %} 

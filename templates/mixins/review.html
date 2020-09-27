@@ -1,0 +1,31 @@
+<div class="w-full flex">
+    <div class="w-1/5 p-6">
+        <div class="font-light mb-2">
+        {% if review.movie is not None %}
+            {{review.movie}}
+        {% else %}
+            {{review.book}}
+        {% endif %}
+        </div>
+        <div class="text-white mb-2 uppercase bg-blue-400 text-xs px-2 inline-block rounded-lg">
+        {% if review.movie is not None %}
+            movie
+        {% else %}
+            book
+        {% endif %}
+        </div>
+        <div class="mb-2">{{review.created_by}}</div>
+        <div class="text-sm mb-2">⭐ {{review.rating}}</div>
+        <div class="flex px-2 items-center">
+            <a href="{% url 'reviews:detail' review.pk %}" class="font-light text-blue-400 text-xs uppercase hover:text-blue-600 hover:underline mr-4">go detail</a>
+            {% if review.created_by == user %}
+            <a href="{% url 'reviews:delete' review.pk %}" class="font-light text-xs uppercase text-orange-400 hover:text-orange-600 hover:underline">delete</a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="w-4/5 h-48 px-2 mb-6 shadow-md">
+        <div class="h-full px-2">
+            <div>{{review.text}}</div>
+        </div>
+    </div>
+</div>

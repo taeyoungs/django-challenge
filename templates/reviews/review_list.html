@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+  Reviews
+{% endblock page_title %}
+
+
+{% block content %}
+<div class="container mx-auto mt-10">
+    <div class="flex items-center mb-6 ml-10">
+        <div class="mr-4 text-lg">Filter:</div>
+        {% if filter_type == "all" %}
+        <a href="{% url 'reviews:reviews' %}" class="py-2 px-4 bg-orange-600 text-white rounded-lg mr-2">All</a>
+        {% else %}
+        <a href="{% url 'reviews:reviews' %}" class="py-2 px-4 bg-orange-400 text-white rounded-lg hover:bg-orange-600 mr-2">All</a>
+        {% endif %}
+        {% if filter_type == "movie" %}
+        <a href="{% url 'reviews:reviews' %}?filter=movie" class="py-2 px-4 bg-orange-600 text-white rounded-lg mr-2">Movies</a>
+        {% else %}
+        <a href="{% url 'reviews:reviews' %}?filter=movie" class="py-2 px-4 bg-orange-400 text-white rounded-lg hover:bg-orange-600 mr-2">Movies</a>
+        {% endif %}
+        {% if filter_type == "book" %}
+        <a href="{% url 'reviews:reviews' %}?filter=book" class="py-2 px-4 bg-orange-600 text-white rounded-lg">Books</a>
+        {% else %}
+        <a href="{% url 'reviews:reviews' %}?filter=book" class="py-2 px-4 bg-orange-400 text-white rounded-lg hover:bg-orange-600">Books</a>
+        {% endif %}
+    </div>
+    <div class="flex flex-wrap px-16">
+    {% for review in reviews %}
+        {% include "mixins/review.html" with review=review %}
+    {% endfor %}
+    </div>
+    <div class="mt-2 flex justify-center">
+        <div>
+        {% if page_obj.has_previous %}
+                <a class="bg-blue-400 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded" href="?page={{page_obj.previous_page_number}}">Previous</a>
+            {% endif %}
+
+            <span class="font-bold text-blue-600">
+            Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
+            </span>
+
+            {% if page_obj.has_next  %}
+                <a class="bg-blue-400 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded" href="?page={{page_obj.next_page_number}}">Next</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %} 
